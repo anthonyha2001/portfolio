@@ -11,7 +11,7 @@ interface SocialLink {
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
-  const email = "anthony.hasrouny@gmail.com";
+  const email = "anthonyhasrouny8@gmail.com";
 
   const quickLinks = [
     { href: "/services", label: "Services" },
@@ -90,7 +90,11 @@ export function Footer() {
             </p>
             <div className="mt-8">
               <Link href="/quote">
-                <Button variant="primary" size="lg">
+                <Button
+                  variant="primary"
+                  size="lg"
+                  className="border border-white"
+                >
                   Request a Quote
                 </Button>
               </Link>

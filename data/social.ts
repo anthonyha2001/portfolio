@@ -8,7 +8,7 @@ export interface SocialLink {
 export const socialLinks: SocialLink[] = [
   {
     name: "Email",
-    href: "mailto:anthony.hasrouny@gmail.com",
+    href: "mailto:anthonyhasrouny8@gmail.com",
     icon: "Mail",
     color: "hover:text-red-500",
   },

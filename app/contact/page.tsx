@@ -47,10 +47,10 @@ export default function ContactPage() {
                     Email
                   </h2>
                   <Link
-                    href="mailto:anthony.hasrouny@gmail.com"
+                    href="mailto:anthonyhasrouny8@gmail.com"
                     className="mt-3 font-sans text-base text-primary underline underline-offset-4"
                   >
-                    anthony.hasrouny@gmail.com
+                    anthonyhasrouny8@gmail.com
                   </Link>
                 </div>
               </div>
