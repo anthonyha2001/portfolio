@@ -104,17 +104,27 @@ export function CaseStudy({ project }: CaseStudyProps) {
       </Section>
 
       {/* Tech Stack */}
-      <Section>
+      <Section className="relative">
+        <div className="absolute inset-0 -z-10">
+          <Image
+            src="/images/projects/bg-body.png"
+            alt="Abstract grid background"
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-black/60" />
+        </div>
         <Container>
-          <div className="mx-auto max-w-4xl">
-            <h2 className="font-serif text-3xl font-bold text-neutral-900 md:text-4xl">
+          <div className="mx-auto max-w-4xl text-white">
+            <h2 className="font-serif text-3xl font-bold md:text-4xl">
               Technologies Used
             </h2>
             <div className="mt-6 flex flex-wrap gap-3">
               {project.technologies.map((tech) => (
                 <span
                   key={tech}
-                  className="rounded-full bg-primary px-4 py-2 font-sans text-sm font-medium text-white md:text-base"
+                  className="rounded-full border border-white/20 bg-white/10 px-4 py-2 font-sans text-sm font-medium text-white md:text-base"
                 >
                   {tech}
                 </span>
