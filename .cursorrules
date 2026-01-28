@@ -1,0 +1,451 @@
+# Premium Portfolio Website - Cursor Rules
+
+## Project Overview
+Building a premium authority website for a web developer. Goal: Position as high-end expert and convert visitors into serious, higher-value client inquiries.
+
+## Tech Stack
+- Next.js 14 (App Router)
+- TypeScript (strict mode)
+- Tailwind CSS v4
+- Framer Motion
+- React Hook Form + Zod
+- Resend (email)
+
+## Code Style & Standards
+
+### TypeScript
+- Always use TypeScript, never `any` types
+- Define interfaces for all props and data structures
+- Use type inference where obvious
+- Export types alongside components
+
+### Component Structure
+```typescript
+// Preferred pattern
+interface ComponentProps {
+  title: string;
+  description?: string;
+}
+
+export function Component({ title, description }: ComponentProps) {
+  return (
+    <div>
+      {/* component content */}
+    </div>
+  );
+}
+```
+
+### File Naming
+- Components: PascalCase (e.g., `Hero.tsx`, `ProjectCard.tsx`)
+- Utilities: camelCase (e.g., `formatDate.ts`, `emailService.ts`)
+- Data files: camelCase (e.g., `projects.ts`, `services.ts`)
+- Pages: kebab-case for routes (e.g., `request-quote/page.tsx`)
+
+### Import Order
+1. React/Next.js imports
+2. Third-party libraries
+3. Local components
+4. Local utilities/data
+5. Types
+6. Styles (if applicable)
+
+```typescript
+import { useState } from 'react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/Button';
+import { formatDate } from '@/lib/utils';
+import type { Project } from '@/types';
+```
+
+## Design System Rules
+
+### Colors
+- Primary: Navy `#1a202c`
+- Accent: Gold `#d4af37`
+- Neutrals: Tailwind gray scale
+- Never use arbitrary hex values, use Tailwind classes
+
+### Typography
+- Headings: `font-serif` (Playfair Display)
+- Body: `font-sans` (Inter)
+- Hierarchy:
+  - h1: `text-4xl md:text-6xl`
+  - h2: `text-3xl md:text-5xl`
+  - h3: `text-2xl md:text-4xl`
+  - body: `text-base md:text-lg`
+
+### Spacing
+- Section padding: `py-16 md:py-24`
+- Container max-width: `max-w-7xl`
+- Card padding: `p-6 md:p-8`
+- Use Tailwind spacing scale, no arbitrary values
+
+## Tailwind CSS v4 Configuration
+
+### Critical: New Syntax
+Tailwind v4 uses a completely different setup than v3:
+
+**globals.css (REQUIRED):**
+```css
+@import "tailwindcss";
+```
+
+Do NOT use old v3 syntax:
+```css
+/* ❌ WRONG - Don't use this */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+**PostCSS Configuration:**
+```javascript
+// postcss.config.mjs
+export default {
+  plugins: {
+    '@tailwindcss/postcss': {},
+    autoprefixer: {},
+  },
+};
+```
+
+**Installation:**
+```bash
+npm install -D tailwindcss@next @tailwindcss/postcss autoprefixer
+```
+
+### Custom Theme (Optional)
+If you need custom colors/fonts, create `tailwind.config.ts`:
+```typescript
+import type { Config } from 'tailwindcss';
+
+const config: Config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#1a202c',
+        accent: '#d4af37',
+      },
+      fontFamily: {
+        sans: ['var(--font-inter)'],
+        serif: ['var(--font-playfair)'],
+      },
+    },
+  },
+};
+
+export default config;
+```
+
+### Animations
+- Use Framer Motion for all animations
+- Duration: 0.3-0.5s
+- Easing: `ease-out` or `ease-in-out`
+- Subtle only - no flashy effects
+- Fade in on scroll with `useInView` hook
+
+```typescript
+// Standard fade-in pattern
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5 }}
+>
+  {content}
+</motion.div>
+```
+
+## Component Guidelines
+
+### Button Component
+- Always use the shared `Button` component
+- Variants: `primary`, `secondary`, `ghost`
+- Sizes: `sm`, `md`, `lg`
+- Never style buttons inline
+
+### Image Optimization
+- Always use Next.js `Image` component
+- Provide `alt` text for accessibility
+- Use `priority` for above-fold images
+- Set explicit width/height or use `fill` prop
+
+### Links
+- Internal links: Use Next.js `Link` component
+- External links: Add `rel="noopener noreferrer"`
+- CTAs should always link to `/quote`
+
+### Forms
+- Use React Hook Form + Zod validation
+- Show validation errors inline
+- Disable submit button during submission
+- Show success/error messages
+- Clear form after successful submission
+
+## Data Management
+
+### Project Data Structure
+```typescript
+interface Project {
+  slug: string;
+  title: string;
+  tagline: string;
+  problem: string;
+  solution: string;
+  results: string[];
+  technologies: string[];
+  thumbnail: string;
+  images: string[];
+  featured: boolean;
+}
+```
+
+### Data Files Location
+- All data in `data/` directory
+- Export as typed arrays
+- No hardcoded content in components
+- Use descriptive variable names
+
+## Performance Rules
+
+### Images
+- Optimize all images before adding to `public/`
+- Target: <500KB per image
+- Use WebP format when possible
+- Lazy load below-fold images
+
+### Bundle Size
+- Import only what you need from libraries
+- Use dynamic imports for heavy components
+- Monitor bundle size with `next build`
+
+### Loading States
+- Show skeleton loaders for async content
+- Disable forms during submission
+- Use `loading.tsx` for route transitions
+
+## Accessibility
+
+### Required Standards
+- All images have descriptive `alt` text
+- Color contrast ratio: minimum 4.5:1
+- Keyboard navigation works throughout
+- Focus states visible on all interactive elements
+- Form labels properly associated with inputs
+
+### Semantic HTML
+- Use proper heading hierarchy (h1 → h2 → h3)
+- Use `<nav>` for navigation
+- Use `<main>` for main content
+- Use `<section>` for content sections
+- Use `<article>` for blog posts/case studies
+
+## SEO Requirements
+
+### Metadata
+- Every page must have unique title and description
+- Title format: "[Page Name] | [Developer Name]"
+- Description: 150-160 characters
+- Include Open Graph tags for social sharing
+
+### Structure
+- One h1 per page
+- Logical heading hierarchy
+- Descriptive URLs (e.g., `/portfolio/ecommerce-redesign`)
+- Internal linking between related pages
+
+## Premium Design Principles
+
+### White Space
+- Generous padding and margins
+- Let content breathe
+- Never cram elements together
+- Mobile: minimum 1rem padding on edges
+
+### Visual Hierarchy
+- Clear distinction between primary/secondary content
+- Use size, weight, and color to guide eye
+- Important CTAs should stand out
+
+### Consistency
+- Reuse components, don't recreate
+- Maintain consistent spacing patterns
+- Use design system tokens
+
+### Polish
+- Smooth transitions on all interactive elements
+- Hover states on clickable elements
+- Loading states for async operations
+- Error states that guide recovery
+
+## Content Guidelines
+
+### Tone
+- Professional but approachable
+- Confident, not arrogant
+- Focus on outcomes, not technical details
+- Business language, not developer jargon
+
+### Copy Rules
+- No Lorem Ipsum in production
+- Active voice over passive
+- Short sentences and paragraphs
+- Scannable content with clear headings
+
+### CTAs
+- Action-oriented ("Request a Quote", "View Portfolio")
+- Every page should have a clear next step
+- Primary CTA: Get in touch / Request quote
+- Make CTAs stand out visually
+
+## API Routes
+
+### Structure
+```typescript
+// app/api/[endpoint]/route.ts
+import { NextResponse } from 'next/server';
+
+export async function POST(request: Request) {
+  try {
+    // Validate input with Zod
+    // Process request
+    // Return success response
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    // Log error
+    // Return error response
+    return NextResponse.json(
+      { error: 'Message' },
+      { status: 500 }
+    );
+  }
+}
+```
+
+### Security
+- Validate all inputs
+- Rate limit if needed
+- Sanitize user data
+- Never expose API keys
+- Use environment variables
+
+## Testing Checklist (Before Deployment)
+
+### Functionality
+- [ ] All links work
+- [ ] Forms submit successfully
+- [ ] Images load properly
+- [ ] Animations play smoothly
+- [ ] Mobile menu works
+
+### Responsive Design
+- [ ] Test on mobile (375px)
+- [ ] Test on tablet (768px)
+- [ ] Test on desktop (1440px)
+- [ ] Test on large screens (1920px+)
+
+### Performance
+- [ ] Lighthouse score >90
+- [ ] First Contentful Paint <2s
+- [ ] No console errors
+- [ ] Images optimized
+
+### Content
+- [ ] No Lorem Ipsum
+- [ ] All copy proofread
+- [ ] All images have alt text
+- [ ] Contact info correct
+- [ ] Links point to correct pages
+
+## Environment Variables
+
+```bash
+# Required for production
+RESEND_API_KEY=your_api_key_here
+NEXT_PUBLIC_SITE_URL=https://yourdomain.com
+
+# Optional
+NEXT_PUBLIC_GA_ID=your_ga_id # Google Analytics
+```
+
+## Git Commit Messages
+
+Format: `type: description`
+
+Types:
+- `feat`: New feature
+- `fix`: Bug fix
+- `style`: UI/styling changes
+- `refactor`: Code restructuring
+- `docs`: Documentation
+- `chore`: Maintenance tasks
+
+Examples:
+- `feat: add hero section to homepage`
+- `fix: mobile menu not closing on link click`
+- `style: adjust button hover states`
+
+## Deployment (Vercel)
+
+### Pre-deployment
+1. Run `npm run build` locally
+2. Fix any build errors
+3. Test production build with `npm run start`
+4. Verify environment variables are set
+
+### Post-deployment
+1. Test all pages on live site
+2. Test form submissions
+3. Check performance (Lighthouse)
+4. Verify SSL certificate
+5. Test on multiple devices
+
+## Common Pitfalls to Avoid
+
+❌ Don't:
+- Use inline styles
+- Hardcode content in components
+- Use `any` type in TypeScript
+- Ignore TypeScript errors
+- Skip image optimization
+- Forget alt text on images
+- Use absolute positioning excessively
+- Create one-off components (reuse!)
+- Skip mobile testing
+- Commit API keys
+
+✅ Do:
+- Use Tailwind utility classes
+- Store content in data files
+- Use proper TypeScript types
+- Fix all TS errors before committing
+- Optimize all images
+- Provide descriptive alt text
+- Use flexbox/grid for layouts
+- Create reusable components
+- Test on mobile first
+- Use environment variables
+
+## Questions to Ask Before Coding
+
+1. Does this component already exist?
+2. Can this be reused elsewhere?
+3. Is this the simplest solution?
+4. Have I typed this properly?
+5. Will this work on mobile?
+6. Is this accessible?
+7. Does this match the design system?
+8. Will this perform well?
+
+## Premium Checklist
+
+Every page should feel:
+- [ ] Spacious (generous white space)
+- [ ] Polished (smooth animations)
+- [ ] Professional (consistent design)
+- [ ] Fast (optimized performance)
+- [ ] Trustworthy (high-quality visuals)
+- [ ] Clear (obvious next steps)
+
+Remember: Premium is in the details. Sweat the small stuff.
