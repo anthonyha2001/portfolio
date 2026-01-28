@@ -98,7 +98,7 @@ Create a `.env.local` file in the root directory with the following variables:
 | Variable | Description | Required |
 |----------|-------------|----------|
 | `RESEND_API_KEY` | API key from Resend for email service | Yes (for quote form) |
-| `NEXT_PUBLIC_SITE_URL` | Your site's URL (e.g., `https://yourdomain.com`) | Yes (for absolute URLs) |
+| `NEXT_PUBLIC_SITE_URL` | Your site's URL (e.g., `https://anthonyhasrouny.com`) | Yes (for absolute URLs) |
 
 See `.env.example` for the template.
 

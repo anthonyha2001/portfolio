@@ -1,8 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  swcMinify: true,
   images: {
     formats: ["image/avif", "image/webp"],
+    domains: [],
   },
   eslint: {
     // Keep `npm run lint` available, but don't fail `next build` on ESLint issues
