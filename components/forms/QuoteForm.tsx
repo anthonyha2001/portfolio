@@ -12,10 +12,9 @@ const validProjectTypes = [
 ] as const;
 
 const validBudgetRanges = [
-  "$5k-10k",
-  "$10k-25k",
-  "$25k-50k",
-  "$50k+",
+  "$100-200",
+  "$300-400",
+  "$400+",
 ] as const;
 
 const quoteFormSchema = z.object({
@@ -257,10 +256,9 @@ export function QuoteForm() {
           className="mt-2 w-full rounded-md border-2 border-neutral-300 px-4 py-3 font-sans text-base transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
         >
           <option value="">Select a budget range</option>
-          <option value="$5k-10k">$5k-10k</option>
-          <option value="$10k-25k">$10k-25k</option>
-          <option value="$25k-50k">$25k-50k</option>
-          <option value="$50k+">$50k+</option>
+          <option value="$100-200">$100-200</option>
+          <option value="$300-400">$300-400</option>
+          <option value="$400+">$400+</option>
         </select>
         {errors.budgetRange && (
           <p
