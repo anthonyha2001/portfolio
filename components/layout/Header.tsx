@@ -141,7 +141,11 @@ export function Header() {
                 className="mt-4"
               >
                 <Link href="/quote" onClick={handleLinkClick}>
-                  <Button variant="primary" size="md" className="w-full">
+                  <Button
+                    variant="primary"
+                    size="md"
+                    className="w-full bg-[#1a202c] hover:bg-[#1a202c]/90 text-white"
+                  >
                     Request Quote
                   </Button>
                 </Link>
