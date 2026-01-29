@@ -37,6 +37,32 @@ export function CaseStudy({ project }: CaseStudyProps) {
             <p className="mt-4 font-sans text-xl leading-relaxed text-neutral-600 md:text-2xl">
               {project.tagline}
             </p>
+            {project.url && (
+              <div className="mt-6">
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-sans text-base font-medium text-white transition-colors hover:bg-primary/90"
+                >
+                  Visit Live Site
+                  <svg
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                </a>
+              </div>
+            )}
           </div>
         </Container>
       </Section>

@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
 export default function Quote() {
   return (
-    <main>
+    <main className="bg-gray-50">
       <Section>
         <Container>
           <div className="mx-auto max-w-3xl text-center">
