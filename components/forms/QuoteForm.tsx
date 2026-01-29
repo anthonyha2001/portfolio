@@ -66,20 +66,23 @@ const quoteFormSchema = z.object({
   ),
   
   // Project Type
-  projectType: z.enum(["New Website", "Website Redesign", "Web Application", "E-commerce Store", "Landing Page", "Other"], {
-    required_error: "Please select a project type",
-  }),
+  projectType: z.string().min(1, "Please select a project type").refine(
+    (val) => ["New Website", "Website Redesign", "Web Application", "E-commerce Store", "Landing Page", "Other"].includes(val),
+    { message: "Please select a valid project type" }
+  ),
   projectTypeOther: z.string().optional(),
   
   // Timeline
-  timeline: z.enum(["ASAP", "1 Week", "2 Weeks", "3 Weeks", "Flexible"], {
-    required_error: "Please select a timeline",
-  }),
+  timeline: z.string().min(1, "Please select a timeline").refine(
+    (val) => ["ASAP", "1 Week", "2 Weeks", "3 Weeks", "Flexible"].includes(val),
+    { message: "Please select a valid timeline" }
+  ),
   
   // Budget
-  budgetRange: z.enum(["$100 - $200", "$300 - $400", "$400 - $600", "Not Sure Yet"], {
-    required_error: "Please select a budget range",
-  }),
+  budgetRange: z.string().min(1, "Please select a budget range").refine(
+    (val) => ["$100 - $200", "$300 - $400", "$400 - $600", "Not Sure Yet"].includes(val),
+    { message: "Please select a valid budget range" }
+  ),
   
   // Target Audience
   targetAudience: z.string().min(10, "Please describe your target audience (at least 10 characters)").max(500, "Maximum 500 characters"),
@@ -96,9 +99,10 @@ const quoteFormSchema = z.object({
   designPreferences: z.string().max(500, "Maximum 500 characters").optional(),
   
   // Content Status
-  contentStatus: z.enum(["I will provide all content (text, images)", "I need help creating content", "Partially - I'll provide some content"], {
-    required_error: "Please select a content status",
-  }),
+  contentStatus: z.string().min(1, "Please select a content status").refine(
+    (val) => ["I will provide all content (text, images)", "I need help creating content", "Partially - I'll provide some content"].includes(val),
+    { message: "Please select a valid content status" }
+  ),
   
   // Additional Information
   additionalInfo: z.string().max(500, "Maximum 500 characters").optional(),
