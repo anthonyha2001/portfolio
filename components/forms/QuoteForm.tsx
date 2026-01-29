@@ -66,18 +66,18 @@ const quoteFormSchema = z.object({
   ),
   
   // Project Type
-  projectType: z.enum([...projectTypes] as [string, ...string[]], {
+  projectType: z.enum(["New Website", "Website Redesign", "Web Application", "E-commerce Store", "Landing Page", "Other"], {
     required_error: "Please select a project type",
   }),
   projectTypeOther: z.string().optional(),
   
   // Timeline
-  timeline: z.enum([...timelines] as [string, ...string[]], {
+  timeline: z.enum(["ASAP", "1 Week", "2 Weeks", "3 Weeks", "Flexible"], {
     required_error: "Please select a timeline",
   }),
   
   // Budget
-  budgetRange: z.enum([...budgetRanges] as [string, ...string[]], {
+  budgetRange: z.enum(["$100 - $200", "$300 - $400", "$400 - $600", "Not Sure Yet"], {
     required_error: "Please select a budget range",
   }),
   
@@ -96,7 +96,7 @@ const quoteFormSchema = z.object({
   designPreferences: z.string().max(500, "Maximum 500 characters").optional(),
   
   // Content Status
-  contentStatus: z.enum([...contentStatuses] as [string, ...string[]], {
+  contentStatus: z.enum(["I will provide all content (text, images)", "I need help creating content", "Partially - I'll provide some content"], {
     required_error: "Please select a content status",
   }),
   
